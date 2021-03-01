@@ -1,0 +1,3 @@
+include ':kandy'
+include ':app'
+rootProject.name = "Kandy"

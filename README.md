@@ -1,5 +1,4 @@
 # Kandy
--------
 [![](https://jitpack.io/v/cuub/kandy.svg)](https://jitpack.io/#cuub/kandy)
 
 Kandy is a set of useful extension functions for Android.
@@ -8,7 +7,6 @@ Some methods were at some point copied from _the internet_. If you're the owner 
 
 
 # Examples
--------
 
 Below you can check some of the functions available:
 
@@ -175,7 +173,6 @@ inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
 ```
 
 # Releases
--------
 
 The latest release is available on [Jitpack](https://jitpack.io/#cuub/kandy).
 
@@ -200,12 +197,10 @@ dependencies {
 
 
 # Contribute
--------
 
 Feel free to create a PR with your most loved extension functions. Make it your own library too.
 
 # License
--------
 
 ```
 

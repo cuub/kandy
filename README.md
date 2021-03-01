@@ -1,5 +1,6 @@
 # Kandy
 -------
+[![](https://jitpack.io/v/cuub/kandy.svg)](https://jitpack.io/#cuub/kandy)
 
 Kandy is a set of useful extension functions for Android.
 It all started as a base library that I use in my own projects.
@@ -172,6 +173,31 @@ inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
     })
 }
 ```
+
+# Releases
+-------
+
+The latest release is available on [Jitpack](https://jitpack.io/#cuub/kandy).
+
+Step 1. Add it in your root build.gradle
+```kotlin
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+
+```
+
+Step 2. Add the dependency
+```kotlin
+dependencies {
+	implementation 'com.github.cuub:kandy:Tag'
+}
+
+```
+
 
 # Contribute
 -------

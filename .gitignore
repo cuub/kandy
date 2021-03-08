@@ -15,3 +15,4 @@
 local.properties
 /app
 .idea
+/kandy/src/main/java/pt/hugofernandes/kandy/TestActivity.kt

@@ -1,6 +1,8 @@
 package pt.hugofernandes.kandy.ktx
 
 /**
+ * Simulates the usage of let with more than one variable
+ *
  * Usage example:
  * val bla = safeLet(street.name, street.number) { name, number -> }
  */

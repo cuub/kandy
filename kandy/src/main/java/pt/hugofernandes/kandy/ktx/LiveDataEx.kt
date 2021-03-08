@@ -8,6 +8,10 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 
 /**
+ * Debounce updates on the given [LiveData].
+ *
+ * @param duration Debounce duration, defaults to 250L
+ *
  * Usage example:
  * liveData.debounce().observe(lifecycleOwner Observer{})
  */
@@ -25,6 +29,8 @@ fun <T> LiveData<T>.debounce(mHandler: Handler? = null, duration: Long = 250L) =
     }
 
 /**
+ * Filters any null values set on the given [LiveData]
+ *
  * Usage example:
  * liveData
  *   .nonNull()
@@ -45,6 +51,9 @@ fun <T> NonNullMediatorLiveData<T>.observe(owner: LifecycleOwner, observer: (t: 
     })
 }
 
+/**
+ * Only updates the given [LiveData] if the new value if different from the current one
+ */
 fun <T> LiveData<T>.distinct(): LiveData<T> {
     val mediatorLiveData: MediatorLiveData<T> = MediatorLiveData()
     mediatorLiveData.addSource(this) {

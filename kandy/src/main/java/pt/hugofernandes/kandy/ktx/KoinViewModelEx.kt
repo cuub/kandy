@@ -8,6 +8,8 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 /**
+ * Injects a [ViewModel] in a [ViewGroup]
+ *
  * Usage example in a ViewGroup:
  * val bla: BlaViewModel by viewModel()
  */

@@ -4,6 +4,11 @@ import android.app.Activity
 import androidx.fragment.app.Fragment
 
 /**
+ * Lazily gets the extra with the given [key]
+ *
+ * @param key The extra key to use
+ * @param default Optional default value
+ *
  * Usage example:
  * val bla by extra(EXTRA_KEY, false)
  */

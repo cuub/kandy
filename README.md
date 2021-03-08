@@ -1,8 +1,8 @@
 # Kandy
 [![](https://jitpack.io/v/cuub/kandy.svg)](https://jitpack.io/#cuub/kandy)
 
-Kandy is a set of useful extension functions for Android.
-It all started as a base library that I use in my own projects.
+Kandy is a set of extension functions for Android. Some you may find super useful, others are just sugar syntax.
+It all started as a library that I use in my own projects.
 Some methods were at some point copied from _the internet_. If you're the owner and want credits, please let me know and thanks for contributing.
 
 
@@ -10,27 +10,21 @@ Some methods were at some point copied from _the internet_. If you're the owner 
 
 Below you can check some of the functions available:
 
-## Activity
-```kotlin
-inline fun <reified T : Activity> Activity.startActivity(options: Bundle? = null) {
-    val intent = Intent()
-    intent.setClass(this, T::class.java)
-    startActivity(intent, options)
-}
-```
-
 ## Bitmap
 ```kotlin
-fun Bitmap.getByteArray(): ByteArray {
+fun Bitmap.getByteArray(
+    compressFormat: Bitmap.CompressFormat = Bitmap.CompressFormat.PNG,
+    quality: Int = 100
+): ByteArray {
     val stream = ByteArrayOutputStream()
-    compress(Bitmap.CompressFormat.PNG, 100, stream)
+    compress(compressFormat, quality, stream)
     return stream.toByteArray()
 }
 ```
 
 ## Context
 ```kotlin
-fun Context.displayWidth(): Int {
+inline fun Context.displayWidth(): Int {
     return resources.displayMetrics.widthPixels
 }
 ```
@@ -47,6 +41,17 @@ fun Context.getResourcesForApplication(packageName: String): Resources? {
     }
 }
 ```
+```kotlin
+inline fun Context.toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT): Toast {
+    return Toast.makeText(this, text, duration).apply { show() }
+}
+```
+```kotlin
+inline fun <reified A : Activity> Context.startActivity(configIntent: Intent.() -> Unit = {}) {
+    startActivity(Intent(this, A::class.java).apply(configIntent))
+}
+```
+
 
 ## Drawable
 ```kotlin
@@ -87,7 +92,7 @@ fun CharSequence?.getFileExtension(): String {
 
 ## Int
 ```kotlin
-fun Int.toColor(context: Context) = ContextCompat.getColor(context, this)
+inline fun Int.toColor(context: Context) = ContextCompat.getColor(context, this)
 ```
 
 ## Koin

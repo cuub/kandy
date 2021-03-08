@@ -8,16 +8,25 @@ import androidx.fragment.app.FragmentManager
 import pt.hugofernandes.kandy.ProtectedClickListener
 
 /**
+ * Sets a custom click listener that ignores any click within the given [interval]
+ * @param interval The interval used to ignore any clicks. Defaults to 250L
+ * @param onProtectedClick What to be invoked
+ *
  * Usage example:
  * view.setProtectedClickListener { }
  */
-fun View.setProtectedClickListener(onProtectedClick: (View) -> Unit) {
-    setOnClickListener(ProtectedClickListener { v ->
+fun View.setProtectedClickListener(interval: Long = 250L, onProtectedClick: (View) -> Unit) {
+    setOnClickListener(ProtectedClickListener(interval) { v ->
         onProtectedClick(v)
     })
 }
 
 /**
+ * Fades the view to the give [alpha] with the given [duration]
+ * @param alpha The final alpha value wanted to ve set
+ * @param duration The duration for the underlying animator that animates the requested properties. Defaults to 200L
+ * @param onAnimationEnd To be invoked when the animation ends. It's optional
+ *
  * Usage example:
  * view.fadeAnimation(0.6f)
  */
@@ -36,6 +45,8 @@ fun View.fadeAnimation(alpha: Float, duration: Long = 200L, onAnimationEnd: (() 
 }
 
 /**
+ * Invokes [f] after view [T] is measured
+ *
  * Usage example:
  * view.afterMeasured { //do something after the view has been measured }
  */
@@ -50,10 +61,5 @@ inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
     })
 }
 
-fun View.isVisible() = visibility == View.VISIBLE
-
-fun View.isInvisible() = visibility == View.INVISIBLE
-
-fun View.isGone() = visibility == View.GONE
-
-fun <F : Fragment> View.findFragment() = runCatching { FragmentManager.findFragment(this) as F }.getOrNull()
+fun <F : Fragment> View.findFragment() =
+    runCatching { FragmentManager.findFragment(this) as F }.getOrNull()

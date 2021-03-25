@@ -177,6 +177,14 @@ inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
 }
 ```
 
+## String
+```kotlin
+fun String.floatToInt() = this.toFloat().toInt()
+```
+```kotlin
+fun String.capitalizeWords() = split(" ").joinToString(" ") { it.toLowerCase().capitalize() }
+```
+
 # Releases
 
 The latest release is available on [Jitpack](https://jitpack.io/#cuub/kandy).

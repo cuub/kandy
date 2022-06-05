@@ -9,10 +9,6 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import pt.hugofernandes.kandy.flow.*
 
-@PublishedApi
-internal inline val LifecycleOwner.lifecycleOwner: LifecycleOwner
-    get() = this
-
 /**
  * Launches a [Flow.collect] for this [Flow] using a [CoroutineScope] tied to this Activity
  * lifecycle and emits values into the [collector].

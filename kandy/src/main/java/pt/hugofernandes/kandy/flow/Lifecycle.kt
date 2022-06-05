@@ -10,22 +10,20 @@ internal inline val LifecycleOwner.lifecycleOwner: LifecycleOwner
     get() = this
 
 /**
- * Accepts the [collector] on the provided [flow] and emits values into it in a lifecycle-aware
+ * Accepts the [collector] on this [Flow] and emits values into it in a lifecycle-aware
  * manner. The collect operation is launched using the [owner]'s [LifecycleCoroutineScope] and
  * automatically repeated on lifecycle event [Lifecycle.State.STARTED].
  * @param owner The [LifecycleOwner] which the lifecycle-aware [Flow.collect] operation is tied to.
- * @param flow The data stream from which values will be emitted.
  * @param coroutineDispatcher The [CoroutineDispatcher] used to launch the collect operation.
  * @param collector The consumer of emitted data.
  */
 @PublishedApi
-internal inline fun <T> lifecycleAwareCollect(
+internal inline fun <T> Flow<T>.lifecycleAwareCollect(
     owner: LifecycleOwner,
-    flow: Flow<T>,
     coroutineDispatcher: CoroutineDispatcher,
     crossinline collector: suspend CoroutineScope.(T) -> Unit
 ) = owner.lifecycleScope.launch(coroutineDispatcher) {
-    owner.repeatOnLifecycle(Lifecycle.State.STARTED) { flow.collect { collector(it) } }
+    owner.repeatOnLifecycle(Lifecycle.State.STARTED) { collect { collector(it) } }
 }
 
 /**

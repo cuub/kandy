@@ -13,6 +13,7 @@ import pt.hugofernandes.kandy.flow.*
  * Launches a [Flow.collect] for this [Flow] using a [CoroutineScope] tied to this Activity
  * lifecycle and emits values into the [collector].
  * @param collector The consumer of emitted data.
+ * @return A reference to the coroutine that launched the collect operation as a [Job].
  */
 context(AppCompatActivity)
 inline fun <T> Flow<T>.onReceive(crossinline collector: suspend CoroutineScope.(T) -> Unit) =
@@ -25,6 +26,7 @@ inline fun <T> Flow<T>.onReceive(crossinline collector: suspend CoroutineScope.(
  * Note that any instance of [StateFlow] already behaves as if `distinctUntilChanged` operator is
  * applied to it, so using [onChange] is effectively the same as using [onReceive].
  * @param collector The consumer of emitted data.
+ * @return A reference to the coroutine that launched the collect operation as a [Job].
  */
 context(AppCompatActivity)
 inline fun <T> Flow<T>.onChange(crossinline collector: suspend CoroutineScope.(T) -> Unit) =
@@ -35,6 +37,7 @@ inline fun <T> Flow<T>.onChange(crossinline collector: suspend CoroutineScope.(T
  * Launches a [Flow.collect] for this [Flow] using a [CoroutineScope] tied to this [Fragment]'s
  * `viewLifecycleOwner`.
  * @param collector The consumer of emitted data.
+ * @return A reference to the coroutine that launched the collect operation as a [Job].
  */
 context(Fragment)
 inline fun <T> Flow<T>.onReceive(crossinline collector: suspend CoroutineScope.(T) -> Unit) =
@@ -47,6 +50,7 @@ inline fun <T> Flow<T>.onReceive(crossinline collector: suspend CoroutineScope.(
  * Note that any instance of [StateFlow] already behaves as if `distinctUntilChanged` operator is
  * applied to it, so using [onChange] is effectively the same as using [onReceive].
  * @param collector The consumer of emitted data.
+ * @return A reference to the coroutine that launched the collect operation as a [Job].
  */
 context(Fragment)
 inline fun <T> Flow<T>.onChange(crossinline collector: suspend CoroutineScope.(T) -> Unit) =
@@ -58,6 +62,7 @@ inline fun <T> Flow<T>.onChange(crossinline collector: suspend CoroutineScope.(T
  * values into the [collector].
  * @param coroutineDispatcher The dispatcher used to perform the [Flow.collect] operation.
  * @param collector The consumer of emitted data.
+ * @return A reference to the coroutine that launched the collect operation as a [Job].
  */
 context(ViewModel)
 inline fun <T> Flow<T>.onReceive(
@@ -73,6 +78,7 @@ inline fun <T> Flow<T>.onReceive(
  * applied to it, so using [onChange] is effectively the same as using [onReceive].
  * @param coroutineDispatcher The dispatcher used to perform the [Flow.collect] operation.
  * @param collector The consumer of emitted data.
+ * @return A reference to the coroutine that launched the collect operation as a [Job].
  */
 context(ViewModel)
 inline fun <T> Flow<T>.onChange(
@@ -85,6 +91,7 @@ inline fun <T> Flow<T>.onChange(
  * lifecycle and emits values into the [collector].
  * @param coroutineDispatcher The dispatcher used to perform the [Flow.collect] operation.
  * @param collector The consumer of emitted data.
+ * @return A reference to the coroutine that launched the collect operation as a [Job].
  */
 context(LifecycleService)
 inline fun <T> Flow<T>.onReceive(
@@ -100,6 +107,7 @@ inline fun <T> Flow<T>.onReceive(
  * applied to it, so using [onChange] is effectively the same as using [onReceive].
  * @param coroutineDispatcher The dispatcher used to perform the [Flow.collect] operation.
  * @param collector The consumer of emitted data.
+ * @return A reference to the coroutine that launched the collect operation as a [Job].
  */
 context(LifecycleService)
 inline fun <T> Flow<T>.onChange(
@@ -111,6 +119,7 @@ inline fun <T> Flow<T>.onChange(
  * Launches a [Flow.collect] for this [Flow] using a [CoroutineScope] tied to this [View]'s
  * lifecycle and emits values into the [collector].
  * @param collector The consumer of emitted data.
+ * @return A reference to the coroutine that launched the collect operation as a [Job].
  */
 context(View, LifecycleOwner)
 inline fun <T> Flow<T>.onReceive(crossinline collector: suspend CoroutineScope.(T) -> Unit) =
@@ -123,6 +132,7 @@ inline fun <T> Flow<T>.onReceive(crossinline collector: suspend CoroutineScope.(
  * Note that any instance of [StateFlow] already behaves as if `distinctUntilChanged` operator is
  * applied to it, so using [onChange] is effectively the same as using [onReceive].
  * @param collector The consumer of emitted data.
+ * @return A reference to the coroutine that launched the collect operation as a [Job].
  */
 context(View, LifecycleOwner)
 inline fun <T> Flow<T>.onChange(

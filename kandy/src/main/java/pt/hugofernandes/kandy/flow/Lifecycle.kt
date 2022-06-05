@@ -16,6 +16,7 @@ internal inline val LifecycleOwner.lifecycleOwner: LifecycleOwner
  * @param owner The [LifecycleOwner] which the lifecycle-aware [Flow.collect] operation is tied to.
  * @param coroutineDispatcher The [CoroutineDispatcher] used to launch the collect operation.
  * @param collector The consumer of emitted data.
+ * @return A reference to the coroutine that launched the collect operation as a [Job].
  */
 @PublishedApi
 internal inline fun <T> Flow<T>.lifecycleAwareCollect(

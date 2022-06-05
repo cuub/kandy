@@ -80,6 +80,13 @@ fun <T> LiveData<T>.observe(owner: LifecycleOwner, observer: (t: T?) -> Unit) {
 
 class NonNullMediatorLiveData<T> : MediatorLiveData<T>()
 
+/**
+ * Creates a new LiveData object that does not emit a value until the this LiveData value has been
+ * changed. The value is considered changed if `equals()` yields `false`.
+ */
+fun <T> LiveData<T>.distinctUntilChange() =
+    Transformations.distinctUntilChanged(this)
+
 //region Lifecycle-aware observe
 /**
  * Adds the given [onChange] block as this [LiveData]'s observer within the this `Activity` lifespan
@@ -90,12 +97,30 @@ inline fun <T> LiveData<T>.observe(crossinline onChange: (T) -> Unit) =
     observe(lifecycleOwner, onChange)
 
 /**
+ * Adds the given [onChange] block as this [LiveData]'s observer within the this `Activity` lifespan
+ * and returns a reference to the observer.
+ * [onChange] will not be called on subsequent repetitions of this [LiveData]'s `value`.
+ */
+context(AppCompatActivity)
+inline fun <T> LiveData<T>.onChange(crossinline onChange: (T) -> Unit) =
+    distinctUntilChange().observe(lifecycleOwner, onChange)
+
+/**
  * Adds the given [onChange] block as this [LiveData]'s observer within the this [Fragment]'s
  * `viewLifecycleOwner` lifespan and returns a reference to the observer.
  */
 context(Fragment)
 inline fun <T> LiveData<T>.observe(crossinline onChange: (T) -> Unit) =
     observe(viewLifecycleOwner, onChange)
+
+/**
+ * Adds the given [onChange] block as this [LiveData]'s observer within the this [Fragment]'s
+ * `viewLifecycleOwner` lifespan and returns a reference to the observer.
+ * [onChange] will not be called on subsequent repetitions of this [LiveData]'s `value`.
+ */
+context(Fragment)
+inline fun <T> LiveData<T>.onChange(crossinline onChange: (T) -> Unit) =
+    distinctUntilChange().observe(viewLifecycleOwner, onChange)
 
 /**
  * Adds the given [onChange] block as this [LiveData]'s observer within the this `Service` lifespan
@@ -106,10 +131,28 @@ inline fun <T> LiveData<T>.observe(crossinline onChange: (T) -> Unit) =
     observe(lifecycleOwner, onChange)
 
 /**
+ * Adds the given [onChange] block as this [LiveData]'s observer within the this `Service` lifespan
+ * and returns a reference to the observer.
+ * [onChange] will not be called on subsequent repetitions of this [LiveData]'s `value`.
+ */
+context(LifecycleService)
+inline fun <T> LiveData<T>.onChange(crossinline onChange: (T) -> Unit) =
+    distinctUntilChange().observe(lifecycleOwner, onChange)
+
+/**
  * Adds the given [onChange] block as this [LiveData]'s observer within the this [View]'s lifespan
  * and returns a reference to the observer.
  */
 context(View, LifecycleOwner)
 inline fun <T> LiveData<T>.observe(crossinline onChange: (T) -> Unit) =
     observe(lifecycleOwner, onChange)
+
+/**
+ * Adds the given [onChange] block as this [LiveData]'s observer within the this [View]'s lifespan
+ * and returns a reference to the observer.
+ * [onChange] will not be called on subsequent repetitions of this [LiveData]'s `value`.
+ */
+context(View, LifecycleOwner)
+inline fun <T> LiveData<T>.onChange(crossinline onChange: (T) -> Unit) =
+    distinctUntilChange().observe(lifecycleOwner, onChange)
 //endregion

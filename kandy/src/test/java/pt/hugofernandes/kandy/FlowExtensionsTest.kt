@@ -28,4 +28,10 @@ class FlowExtensionsTest {
         val collectedOnIO = FlowyViewModel(Dispatchers.IO).numbers.toList()
         assertContentEquals(FlowyViewModel.Numbers, collectedOnIO)
     }
+
+    @Test
+    fun `Flow is collected in ViewModel with onChange`() = runTest {
+        val collected = FlowyViewModel(Dispatchers.IO).onChangeNumbers.toList()
+        assertContentEquals(FlowyViewModel.Numbers, collected)
+    }
 }
